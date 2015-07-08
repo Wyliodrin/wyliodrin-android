@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent">
+
+    <com.androidplot.xy.XYPlot
+        android:id="@+id/dynamicXYPlot"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        androidplot.renderMode="use_background_thread"
+        androidPlot.title="A Dynamic XY Plot"
+        androidPlot.domainLabel="Domain"
+        androidPlot.rangeLabel="Range"
+        androidPlot.titleWidget.labelPaint.textSize="50dp"
+        androidPlot.domainLabdelWidget.labelPaint.textSize="20dp"
+        androidPlot.rangeLabelWidget.labelPaint.textSize="20dp"
+        androidPlot.graphWidget.marginTop="20dp"
+        androidPlot.graphWidget.marginLeft="10dp"
+        androidPlot.graphWidget.marginBottom="25dp"
+        androidPlot.graphWidget.marginRight="10dp"
+        androidPlot.graphWidget.rangeLabelPaint.textSize="20dp"
+        androidPlot.graphWidget.rangeOriginLabelPaint.textSize="20dp"
+        androidPlot.graphWidget.domainLabelPaint.textSize="20dp"
+        androidPlot.graphWidget.domainOriginLabelPaint.textSize="20dp"
+        androidPlot.legendWidget.textPaint.textSize="20dp"
+        androidPlot.legendWidget.iconSizeMetrics.heightMetric.value="15dp"
+        androidPlot.legendWidget.iconSizeMetrics.widthMetric.value="15dp"
+        androidPlot.legendWidget.heightMetric.value="25dp"
+        androidPlot.legendWidget.positionMetrics.anchor="right_bottom"/>
+
+</LinearLayout>

@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 15
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "com.wyliodrin.mobileapp"
+        minSdkVersion 9
+        targetSdkVersion 15
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled  false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+
+    maven {
+        url "https://raw.github.com/embarkmobile/zxing-android-minimal/mvn-repo/maven-repository/"
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile group: 'org.achartengine', name: 'achartengine', version: '1.2.0'
+//    compile 'com.android.support:appcompat-v7:19.1.+'
+    compile 'com.android.support:appcompat-v7:20.0.0'
+    compile 'com.androidplot:androidplot-core:0.6.1'
+
+    compile "org.igniterealtime.smack:smack-android:4.1.0-rc1"
+    compile "org.igniterealtime.smack:smack-tcp:4.1.0-rc1"
+    compile "org.igniterealtime.smack:smack-android-extensions:4.1.0-rc1"
+
+    compile 'com.google.zxing:core:2.2'
+    compile 'com.embarkmobile:zxing-android-minimal:1.2.1@aar'
+}

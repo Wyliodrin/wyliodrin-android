@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.wyliodrin.mobileapp.DashboardActivity">
+    <item
+        android:id="@+id/save_board"
+        android:title="@string/save_board"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Wyliodrin</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="welcome">Welcome to</string>
+    <string name="scan_info">Just scan the QR Code attached to your Wyliodrin account in order to log in</string>
+    <string name="logout_info">You have successfully logged out!</string>
+    <string name="action_settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="title_activity_dynamic_xyplot">DynamicXYPlotActivity</string>
+    <string name="title_activity_real_time_graphics">RealTimeGraphics</string>
+    <string name="title_activity_other_real_time_graphics">OtherRealTImeGraphicsActivity</string>
+    <string name="title_activity_bar_graph">BarGraphActivity</string>
+    <string name="title_activity_drower">DrowerActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="save_board">Save</string>
+    <array name="sensor_types" ></array>
+    <string name="title_activity_logout">LogoutActivity</string>
+</resources>
