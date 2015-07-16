@@ -8,8 +8,8 @@ android {
         applicationId "com.wyliodrin.mobileapp"
         minSdkVersion 9
         targetSdkVersion 15
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
     }
     buildTypes {
         release {

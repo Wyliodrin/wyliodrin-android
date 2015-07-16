@@ -225,7 +225,8 @@ public class SensorWidget extends TextView implements OutputDataWidget {
         sensorWidget.setSize(width);
         sensorWidget.setPadding(padding, padding, padding, padding);
         sensorWidget.setSensor(sensor);
-        sensorWidget.setBackgroundColor(Color.GRAY);
+        sensorWidget.setBackgroundColor(Color.rgb(229, 65, 37));
+        sensorWidget.setTextColor(Color.WHITE);
         sensorWidget.setTimeout(timeout);
         sensorWidget.setLabel(label);
 

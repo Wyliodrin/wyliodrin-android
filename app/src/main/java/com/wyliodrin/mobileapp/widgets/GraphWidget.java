@@ -22,6 +22,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.androidplot.Plot;
+import com.androidplot.ui.AnchorPosition;
+import com.androidplot.ui.XLayoutStyle;
+import com.androidplot.ui.YLayoutStyle;
 import com.androidplot.util.PixelUtils;
 import com.androidplot.xy.BarFormatter;
 import com.androidplot.xy.BoundaryMode;
@@ -124,19 +128,19 @@ public class GraphWidget extends XYPlot implements InputDataWidget {
         XYSeriesFormatter formatter = null;
 
         if (graphType.equals(GraphType.StepGraph)) {
-            StepFormatter stepFormatter = new StepFormatter(Color.argb(100, 0, 200, 0), Color.rgb(0, 80, 0));
+            StepFormatter stepFormatter = new StepFormatter(Color.argb(229, 65, 37, 0), Color.rgb(165, 41, 16));
             stepFormatter.getLinePaint().setStrokeWidth(3);
             stepFormatter.getLinePaint().setStrokeJoin(Paint.Join.ROUND);
 
             formatter = stepFormatter;
         } else if(graphType.equals(GraphType.BarGraph)) {
-            BarFormatter barFormatter = new BarFormatter(Color.argb(100, 0, 200, 0), Color.rgb(0, 80, 0));
+            BarFormatter barFormatter = new BarFormatter(Color.rgb(165, 41, 16), Color.argb(229, 65, 37, 0));
             barFormatter.getLinePaint().setStrokeWidth(3);
             barFormatter.getLinePaint().setStrokeJoin(Paint.Join.ROUND);
 
             formatter = barFormatter;
         } else if(graphType.equals(GraphType.LineGraph)) {
-            LineAndPointFormatter lineFormatter = new LineAndPointFormatter(Color.rgb(0, 0, 200), null, null, null);
+            LineAndPointFormatter lineFormatter = new LineAndPointFormatter(Color.rgb(229, 65, 37), null, null, null);
             lineFormatter.getLinePaint().setStrokeWidth(3);
             lineFormatter.getLinePaint().setStrokeJoin(Paint.Join.ROUND);
             formatter = lineFormatter;
@@ -151,6 +155,21 @@ public class GraphWidget extends XYPlot implements InputDataWidget {
 
         setRangeValueFormat(new DecimalFormat("###.#"));
         setRangeBoundaries(minY, maxY, BoundaryMode.FIXED);
+
+        setBorderStyle(Plot.BorderStyle.NONE, null, null);
+        setPlotMargins(0, 0, 0, 0);
+        setPlotPadding(0, 0, 0, 0);
+        setGridPadding(0, 10, 5, 0);
+
+        getGraphWidget().getBackgroundPaint().setColor(Color.WHITE);
+        getGraphWidget().getGridBackgroundPaint().setColor(Color.WHITE);
+
+        getGraphWidget().getDomainLabelPaint().setColor(Color.rgb(229, 65, 37));
+        getGraphWidget().getRangeLabelPaint().setColor(Color.rgb(229, 65, 37));
+
+        getGraphWidget().getDomainOriginLabelPaint().setColor(Color.rgb(229, 65, 37));
+        getGraphWidget().getDomainOriginLinePaint().setColor(Color.rgb(229, 65, 37));
+        getGraphWidget().getRangeOriginLinePaint().setColor(Color.rgb(229, 65, 37));
 
         DashPathEffect dashFx = new DashPathEffect(
                 new float[] {PixelUtils.dpToPix(3), PixelUtils.dpToPix(3)}, 0);
