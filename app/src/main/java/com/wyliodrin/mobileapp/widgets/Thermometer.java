@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.wyliodrin.mobileapp.DashboardActivity;
@@ -313,6 +315,8 @@ public class Thermometer extends RelativeLayout implements InputDataWidget {
             objects.add(thermometer);
         }
         thermometer.setOnLongClickListener(onLongClick);
+
+        ((DashboardActivity)activity).saveBoard(DashboardActivity.currentBoardName);
     }
 
     @Override

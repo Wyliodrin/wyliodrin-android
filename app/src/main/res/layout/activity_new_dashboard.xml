@@ -56,24 +56,16 @@
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:weightSum="1"
-                android:layout_marginBottom="2dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="#3D5559"
                 >
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight=".5"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:text="Choose board:" />
 
                 <Spinner
                     android:id="@+id/boardSpinner"
+                    android:background="#3D5559"
                     android:layout_width="fill_parent"
+                    android:popupBackground="#63767A"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>

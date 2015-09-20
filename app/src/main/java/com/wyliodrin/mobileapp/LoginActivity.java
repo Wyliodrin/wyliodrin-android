@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -99,7 +100,7 @@ public class LoginActivity extends Activity {
             this.user = user;
             this.password = password;
             this.owner = owner;
-
+            Log.d("test", user+" " + password + " " + owner);
             progresDialog = ProgressDialog.show(LoginActivity.this, "Please wait", "Logging in", true, false);
         }
 
@@ -116,7 +117,7 @@ public class LoginActivity extends Activity {
                         progresDialog.dismiss();
                         progresDialog = null;
                     }
-
+                    Log.d("test", result+"");
                     if (result.equals(ServerConnection.LoginResult.Success)) {
                         SharedPreferences.Editor editor = shPref.edit();
                         editor.putString("user", user);

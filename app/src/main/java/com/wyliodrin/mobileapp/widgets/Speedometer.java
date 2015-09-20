@@ -316,6 +316,8 @@ public class Speedometer extends View implements InputDataWidget {
         }
 
         speedometer.setOnLongClickListener(onLongClick);
+
+        ((DashboardActivity)activity).saveBoard(DashboardActivity.currentBoardName);
     }
 
     @Override

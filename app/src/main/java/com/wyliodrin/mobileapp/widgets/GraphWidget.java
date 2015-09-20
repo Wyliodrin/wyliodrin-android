@@ -355,6 +355,9 @@ public class GraphWidget extends XYPlot implements InputDataWidget {
             layout.addView(graph);
             objects.add(graph);
         }
+
+        ((DashboardActivity)activity).saveBoard(DashboardActivity.currentBoardName);
+
     }
 
     public GraphWidget(Context context, GraphType type, int minY, int maxY) {

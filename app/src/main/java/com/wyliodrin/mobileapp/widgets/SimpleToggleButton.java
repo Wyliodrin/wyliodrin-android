@@ -216,6 +216,8 @@ public class SimpleToggleButton extends ToggleButton implements OutputDataWidget
                 }
             }
         });
+
+        ((DashboardActivity)activity).saveBoard(DashboardActivity.currentBoardName);
     }
 
     @Override

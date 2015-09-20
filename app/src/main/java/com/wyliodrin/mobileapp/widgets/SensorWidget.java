@@ -13,6 +13,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -239,6 +240,9 @@ public class SensorWidget extends TextView implements OutputDataWidget {
         }
 
         sensorWidget.setOnLongClickListener(onLongClick);
+
+        ((DashboardActivity)activity).saveBoard(DashboardActivity.currentBoardName);
+
     }
 
     @Override

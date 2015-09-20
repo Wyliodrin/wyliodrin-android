@@ -37,7 +37,8 @@ import java.util.List;
 public class ServerConnection {
     private static ServerConnection instance = null;
 
-    private static final String SERVER_HOST = "wyliodrin.org";
+    private static final String SERVER_HOST = "wxmpp.wyliodrin.com";
+    private static final String SERVER_SERVICE_NAME = "wyliodrin.com";
     private static final int SERVER_PORT = 5222;
 
     private AbstractXMPPConnection connection;
@@ -198,7 +199,7 @@ public class ServerConnection {
 
         XMPPTCPConnectionConfiguration.Builder configBuilder = XMPPTCPConnectionConfiguration.builder()
                 .setUsernameAndPassword(username, password)
-                .setServiceName(SERVER_HOST)
+                .setServiceName(SERVER_SERVICE_NAME)
                 .setHost(SERVER_HOST)
                 .setPort(SERVER_PORT);
 
@@ -314,6 +315,7 @@ public class ServerConnection {
 
     public void sendStringMessage(String label, String message) {
         sendMessage(label, "\"" + message + "\"");
+        //sendMessage("signal:" + label, "\"" + message + "\"");
     }
 
     public void setDashboard(DashboardActivity dashboard) {

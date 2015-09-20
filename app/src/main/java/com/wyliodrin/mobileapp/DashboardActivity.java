@@ -52,9 +52,13 @@ public class DashboardActivity extends FragmentActivity {
     private DrawerLayout mDrawerLayout;
 
     private JSONObject currentBoard;
-    private int boardId = -1;
+    public static int boardId = -1;
 
     private List<String> boards;
+
+    private static final String labelTag= "signal:";
+
+    public static String currentBoardName = "";
 
     private View.OnLongClickListener widgetLongClick = new View.OnLongClickListener() {
         @Override
@@ -171,11 +175,17 @@ public class DashboardActivity extends FragmentActivity {
         String boardString = intent.getStringExtra("board");
         boardId = intent.getIntExtra("board_id", -1);
 
+        if (boardId == -1) {
+            chooseDashboardName();
+        }
+
         if(boardString != null && boardId != -1) {
             try {
                 currentBoard = new JSONObject(boardString);
 
                 JSONArray widgets = currentBoard.getJSONArray("objects");
+
+                currentBoardName = currentBoard.optString("name", "");
 
                 for (int i = 0; i < widgets.length(); i++) {
                     JSONObject widget = widgets.getJSONObject(i);
@@ -210,6 +220,7 @@ public class DashboardActivity extends FragmentActivity {
                         case Widget.TYPE_SEEK_BAR:
                             SimpleSeekBar.addToBoard(this, (LinearLayout) findViewById(R.id.widgetsContainer) ,widgetLongClick,
                                 objects, widget.optInt("width"), widget.optInt("max_value"), widget.optString("label"), -1);
+                            break;
                         case Widget.TYPE_SPEEDOMETER:
                             Speedometer.addToBoard(this, (LinearLayout) findViewById(R.id.widgetsContainer), widgetLongClick,
                                     objects, widget.optInt("diameter"), widget.optInt("min_value"), widget.optInt("max_value"), widget.optString("label"), -1);
@@ -234,10 +245,10 @@ public class DashboardActivity extends FragmentActivity {
         }
 
         boards = ServerConnection.getInstance().getBoardsList();
-        Spinner boardsSpinner = (Spinner) findViewById(R.id.boardSpinner);
+        final Spinner boardsSpinner = (Spinner) findViewById(R.id.boardSpinner);
 
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item);
+        spinnerAdapter.setDropDownViewResource(R.layout.spinner_item);
         boardsSpinner.setAdapter(spinnerAdapter);
         for (String board: boards) {
             spinnerAdapter.add(board);
@@ -260,7 +271,6 @@ public class DashboardActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         ServerConnection.getInstance().setDashboard(this);
     }
 
@@ -274,13 +284,11 @@ public class DashboardActivity extends FragmentActivity {
                 sensorWidget.unregisterSensor();
             }
         }
-
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
         ServerConnection.getInstance().setDashboard(null);
     }
 
@@ -315,7 +323,12 @@ public class DashboardActivity extends FragmentActivity {
             } catch (JSONException e) {
             }
         } else {
-            list.put(obj);
+            boardId = list.length();
+            try {
+                list.put(boardId, obj);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         shPref.edit().putString("boards", list.toString()).commit();
     }
@@ -401,6 +414,11 @@ public class DashboardActivity extends FragmentActivity {
         for (Widget widget : objects) {
             if (widget instanceof InputDataWidget) {
                 final InputDataWidget w = (InputDataWidget) widget;
+
+                if (label.startsWith(labelTag)) {
+                    label = label.replace(labelTag, "");
+                }
+
                 if (w.getLabel().equals(label)) {
                     ((View) w).post(new Runnable() {
                         @Override
@@ -455,5 +473,57 @@ public class DashboardActivity extends FragmentActivity {
                 break;
         }
 
+    }
+
+    private void chooseDashboardName () {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(DashboardActivity.this, R.style.CustomAlertDialogStyle));
+        alertDialogBuilder.setTitle("Dashboard name");
+
+        LayoutInflater inflater = LayoutInflater.from(DashboardActivity.this);
+        final View alert_dialog_xml = inflater.inflate(R.layout.alert_dialog_dashboard_name, null);
+        EditText nameEditText = (EditText) alert_dialog_xml.findViewById(R.id.name);
+
+        if (boardId != -1) {
+            nameEditText.setText(currentBoard.optString("name"), TextView.BufferType.EDITABLE);
+        }
+        alertDialogBuilder.setView(alert_dialog_xml);
+
+        alertDialogBuilder
+                .setMessage("Choose dashboard name")
+                .setPositiveButton("Save", null);
+
+        final AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+
+                Button b = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                b.setOnClickListener(new View.OnClickListener() {
+
+                    public void onClick(View v) {
+
+                        EditText nameEditText = (EditText) alert_dialog_xml.findViewById(R.id.name);
+
+                        String name = null;
+                        if (nameEditText != null) {
+                            name = nameEditText.getText().toString();
+
+                            if (name.isEmpty())
+                                nameEditText.setError("Name is required");
+                        }
+
+                        if (!name.isEmpty()) {
+                            //saveBoard(name);
+                            currentBoardName = name;
+                            //Toast.makeText(DashboardActivity.this, "Dashboard " + name + " saved", Toast.LENGTH_LONG).show();
+                            alertDialog.dismiss();
+                        }
+                    }
+                });
+            }
+        });
+
+        alertDialog.show();
     }
 }

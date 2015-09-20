@@ -187,6 +187,8 @@ public class SimpleButton extends Button implements OutputDataWidget {
             layout.addView(simpleButton);
             objects.add(simpleButton);
         }
+
+        ((DashboardActivity)activity).saveBoard(DashboardActivity.currentBoardName);
     }
 
     @Override

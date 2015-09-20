@@ -214,6 +214,8 @@ public class SimpleSeekBar extends RelativeLayout implements OutputDataWidget {
             layout.addView(simpleSeekBar);
             objects.add(simpleSeekBar);
         }
+
+        ((DashboardActivity)activity).saveBoard(DashboardActivity.currentBoardName);
     }
 
     @Override
