@@ -83,7 +83,7 @@ public class LoginActivity extends Activity {
 
                     new LoginThread(user, password, owner).start();
                 } else {
-                    Toast.makeText(getApplicationContext(), "The QR Code is wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "The QR Code is wrong.", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -117,7 +117,7 @@ public class LoginActivity extends Activity {
                         progresDialog.dismiss();
                         progresDialog = null;
                     }
-                    Log.d("test", result+"");
+                    
                     if (result.equals(ServerConnection.LoginResult.Success)) {
                         SharedPreferences.Editor editor = shPref.edit();
                         editor.putString("user", user);
@@ -128,6 +128,8 @@ public class LoginActivity extends Activity {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
+                    } else if (result.equals(ServerConnection.LoginResult.Failed)) {
+                        Toast.makeText(LoginActivity.this, "Please check your Internet connection.", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

@@ -235,7 +235,7 @@ public class ServerConnection {
                             e.printStackTrace();
                       } catch (SmackException.NotConnectedException e) {
                             e.printStackTrace();
-                        }
+                      }
 
                         Collection<RosterEntry> entries = roster.getEntries();
 
