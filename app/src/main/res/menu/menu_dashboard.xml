@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.wyliodrin.mobileapp.DashboardActivity">
     <item
-        android:id="@+id/save_board"
-        android:title="@string/save_board"
+        android:id="@+id/rename_board"
+        android:title="@string/rename_board"
         android:orderInCategory="100"
         app:showAsAction="never" />
 </menu>

@@ -60,6 +60,9 @@ public class DashboardActivity extends FragmentActivity {
 
     public static String currentBoardName = "";
 
+    /**
+     * On long click the widget will be removed
+     */
     private View.OnLongClickListener widgetLongClick = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(final View view) {
@@ -99,6 +102,8 @@ public class DashboardActivity extends FragmentActivity {
                             LinearLayout layout = (LinearLayout) findViewById(R.id.widgetsContainer);
                             layout.removeView(view);
                             objects.remove(view);
+
+                            saveBoard(currentBoardName);
 
                         }
                     }).setNegativeButton("No", null).show();
@@ -292,6 +297,10 @@ public class DashboardActivity extends FragmentActivity {
         ServerConnection.getInstance().setDashboard(null);
     }
 
+    /**
+     * Save the current board in SharedPreferences
+     * @param name of the board
+     */
     public void saveBoard(String name) {
         JSONArray array = new JSONArray();
 
@@ -344,7 +353,7 @@ public class DashboardActivity extends FragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.save_board:
+            case R.id.rename_board:
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(DashboardActivity.this, R.style.CustomAlertDialogStyle));
                 alertDialogBuilder.setTitle("Dashboard name");
@@ -360,7 +369,7 @@ public class DashboardActivity extends FragmentActivity {
 
                 alertDialogBuilder
                         .setMessage("Choose dashboard name")
-                        .setPositiveButton("Save", null)
+                        .setPositiveButton("Rename", null)
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
@@ -390,7 +399,8 @@ public class DashboardActivity extends FragmentActivity {
 
                                 if (!name.isEmpty()) {
                                     saveBoard(name);
-                                    Toast.makeText(DashboardActivity.this, "Dashboard " + name + " saved", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(DashboardActivity.this, "Dashboard renamed.", Toast.LENGTH_SHORT).show();
+                                    currentBoardName = name;
                                     alertDialog.dismiss();
                                 }
                             }
@@ -403,6 +413,12 @@ public class DashboardActivity extends FragmentActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(DashboardActivity.this, "Dashboard " + currentBoardName + " saved.", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override
@@ -514,9 +530,7 @@ public class DashboardActivity extends FragmentActivity {
                         }
 
                         if (!name.isEmpty()) {
-                            //saveBoard(name);
                             currentBoardName = name;
-                            //Toast.makeText(DashboardActivity.this, "Dashboard " + name + " saved", Toast.LENGTH_LONG).show();
                             alertDialog.dismiss();
                         }
                     }
